@@ -33,7 +33,8 @@ output "setup_instructions" {
     aws apigateway get-api-key --api-key ${aws_api_gateway_api_key.api_key.id} --include-value --query 'value' --output text
     
     Then add to .env:
-    ALEX_API_KEY=<the-api-key-value>
+    # ALEX_API_KEY=<the-api-key-value>
+    ALEX_API_KEY=O7grxXQly55ofYi9MQwcU36TLwcK0prAaRSW8aNq
     
     Test the API:
     curl -X POST ${aws_api_gateway_stage.api.invoke_url}/ingest \
