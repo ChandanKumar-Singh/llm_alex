@@ -90,81 +90,98 @@ Since Guide 4, we need additional AWS permissions for Aurora and related service
 
 ```json
 {
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Sid": "RDSPermissions",
-      "Effect": "Allow",
-      "Action": [
-        "rds:CreateDBCluster",
-        "rds:CreateDBInstance",
-        "rds:CreateDBSubnetGroup",
-        "rds:DeleteDBCluster",
-        "rds:DeleteDBInstance",
-        "rds:DeleteDBSubnetGroup",
-        "rds:DescribeDBClusters",
-        "rds:DescribeDBInstances",
-        "rds:DescribeDBSubnetGroups",
-        "rds:DescribeGlobalClusters",
-        "rds:ModifyDBCluster",
-        "rds:ModifyDBInstance",
-        "rds:ModifyDBSubnetGroup",
-        "rds:AddTagsToResource",
-        "rds:ListTagsForResource",
-        "rds:RemoveTagsFromResource",
-        "rds-data:ExecuteStatement",
-        "rds-data:BatchExecuteStatement",
-        "rds-data:BeginTransaction",
-        "rds-data:CommitTransaction",
-        "rds-data:RollbackTransaction"
-      ],
-      "Resource": "*"
-    },
-    {
-      "Sid": "EC2Permissions",
-      "Effect": "Allow",
-      "Action": [
-        "ec2:DescribeVpcs",
-        "ec2:DescribeVpcAttribute",
-        "ec2:DescribeSubnets",
-        "ec2:DescribeAvailabilityZones",
-        "ec2:DescribeSecurityGroups",
-        "ec2:CreateSecurityGroup",
-        "ec2:DeleteSecurityGroup",
-        "ec2:AuthorizeSecurityGroupIngress",
-        "ec2:AuthorizeSecurityGroupEgress",
-        "ec2:RevokeSecurityGroupIngress",
-        "ec2:RevokeSecurityGroupEgress",
-        "ec2:CreateTags",
-        "ec2:DescribeTags"
-      ],
-      "Resource": "*"
-    },
-    {
-      "Sid": "SecretsManagerPermissions",
-      "Effect": "Allow",
-      "Action": [
-        "secretsmanager:CreateSecret",
-        "secretsmanager:DeleteSecret",
-        "secretsmanager:DescribeSecret",
-        "secretsmanager:GetSecretValue",
-        "secretsmanager:PutSecretValue",
-        "secretsmanager:UpdateSecret"
-      ],
-      "Resource": "*"
-    },
-    {
-      "Sid": "KMSPermissions",
-      "Effect": "Allow",
-      "Action": [
-        "kms:CreateGrant",
-        "kms:Decrypt",
-        "kms:DescribeKey",
-        "kms:Encrypt"
-      ],
-      "Resource": "*"
-    }
-  ]
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Sid": "ServiceLinkedRolePermission",
+			"Effect": "Allow",
+			"Action": [
+				"iam:CreateServiceLinkedRole"
+			],
+			"Resource": "*",
+			"Condition": {
+				"StringEquals": {
+					"iam:AWSServiceName": [
+						"rds.amazonaws.com"
+					]
+				}
+			}
+		},
+		{
+			"Sid": "RDSPermissions",
+			"Effect": "Allow",
+			"Action": [
+				"rds:CreateDBCluster",
+				"rds:CreateDBInstance",
+				"rds:CreateDBSubnetGroup",
+				"rds:DeleteDBCluster",
+				"rds:DeleteDBInstance",
+				"rds:DeleteDBSubnetGroup",
+				"rds:DescribeDBClusters",
+				"rds:DescribeDBInstances",
+				"rds:DescribeDBSubnetGroups",
+				"rds:DescribeGlobalClusters",
+				"rds:ModifyDBCluster",
+				"rds:ModifyDBInstance",
+				"rds:ModifyDBSubnetGroup",
+				"rds:AddTagsToResource",
+				"rds:ListTagsForResource",
+				"rds:RemoveTagsFromResource",
+				"rds-data:ExecuteStatement",
+				"rds-data:BatchExecuteStatement",
+				"rds-data:BeginTransaction",
+				"rds-data:CommitTransaction",
+				"rds-data:RollbackTransaction"
+			],
+			"Resource": "*"
+		},
+		{
+			"Sid": "EC2Permissions",
+			"Effect": "Allow",
+			"Action": [
+				"ec2:DescribeVpcs",
+				"ec2:DescribeVpcAttribute",
+				"ec2:DescribeSubnets",
+				"ec2:DescribeAvailabilityZones",
+				"ec2:DescribeSecurityGroups",
+				"ec2:CreateSecurityGroup",
+				"ec2:DeleteSecurityGroup",
+				"ec2:AuthorizeSecurityGroupIngress",
+				"ec2:AuthorizeSecurityGroupEgress",
+				"ec2:RevokeSecurityGroupIngress",
+				"ec2:RevokeSecurityGroupEgress",
+				"ec2:CreateTags",
+				"ec2:DescribeTags"
+			],
+			"Resource": "*"
+		},
+		{
+			"Sid": "SecretsManagerPermissions",
+			"Effect": "Allow",
+			"Action": [
+				"secretsmanager:CreateSecret",
+				"secretsmanager:DeleteSecret",
+				"secretsmanager:DescribeSecret",
+				"secretsmanager:GetSecretValue",
+				"secretsmanager:PutSecretValue",
+				"secretsmanager:UpdateSecret",
+				"secretsmanager:TagResource",
+				"secretsmanager:GetResourcePolicy"
+			],
+			"Resource": "*"
+		},
+		{
+			"Sid": "KMSPermissions",
+			"Effect": "Allow",
+			"Action": [
+				"kms:CreateGrant",
+				"kms:Decrypt",
+				"kms:DescribeKey",
+				"kms:Encrypt"
+			],
+			"Resource": "*"
+		}
+	]
 }
 ```
 

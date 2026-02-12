@@ -256,7 +256,7 @@ resource "aws_scheduler_schedule" "research_schedule" {
     mode = "OFF"
   }
   
-  schedule_expression = "rate(5 minutes)"
+  schedule_expression = "rate(5 hour)"
   
   target {
     arn      = aws_lambda_function.scheduler_lambda[0].arn
