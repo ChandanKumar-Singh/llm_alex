@@ -99,6 +99,7 @@ resource "aws_iam_role_policy" "lambda_agents_policy" {
       {
         Effect = "Allow"
         Action = [
+          "sqs:Sendmessage",
           "sqs:ReceiveMessage",
           "sqs:DeleteMessage",
           "sqs:GetQueueAttributes"
