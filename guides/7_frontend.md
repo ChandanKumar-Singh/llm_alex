@@ -629,3 +629,19 @@ aws logs tail /aws/lambda/alex-api --follow
 - Use AWS Free Tier where possible
 
 Excellent work completing the Alex Financial Advisor! 🚀
+
+```mermaid
+graph LR
+    User --> CloudFront
+    CloudFront --> API_Gateway
+    API_Gateway --> Lambda_API
+    Lambda_API --> SQS
+    SQS --> Planner
+    Planner --> Tagger
+    Planner --> Reporter
+    Planner --> Charter
+    Planner --> Retirement
+    Planner --> Aurora
+    Reporter --> S3Vectors
+    Researcher --> S3Vectors
+```
